@@ -1,0 +1,197 @@
+3.30
+
+num1 = eval(input("Enter the first number: "))
+
+num2 = eval(input("Enter the second number: "))
+
+num3 = eval(input("Enter the third number: "))
+
+num4 = eval(input("Enter the fourth number: "))
+
+if (num1+num2+num3)/ 3 == num4:
+    
+    print('equal')
+
+3.34
+
+def pay(wage, hours):
+    if hours<=40:
+        return hours*wage
+    else:
+        return 40*wage+(hours-40)*1.5*wage
+def distance(num_of_seconds):
+    return num_of_seconds * 340.29 / 1000
+distance(5)
+
+Random Cinema
+
+from random import randint
+
+def random_movie(lst):
+    result = []
+    for i in range(3):
+        while True:
+            word = lst[randint(0,len(lst)-1)]
+            if word not in result:
+                result.append(word)
+    return ''.join(result)
+def main():
+    n = int(input("please enter a number of movies you'd like to generate: "))
+    words = input("please enter a list of words: ")
+    
+    print("welcome to Randoplex! Currently playing movies are:")
+    for i in range(n):
+        print(random_movie(words))
+main()
+
+def average():
+    user_input = input("please enter a sentence: ")
+    count_length_words = len(user_input.split())
+    print("the average length of a word in a sentence: ")
+    return(len(user_input)-count_length_words+1)/count_length_words
+
+4.25
+
+def vowelCount(s):
+    print("a, e, i, o, and u appear, respectively", end=" ")
+    assumption= "aeior"
+    for V in assumption:
+        print(', {}'.format(s.count(V)), end="")
+        print("times")
+def exclamation(string):
+    result = ''
+for v in string:
+    if v in 'aeiou':
+        result+=3*v
+    else:
+        result+=v
+return result + '!'
+
+
+5.43
+
+def evenrow(table):
+    for row in table:
+        if sum(row)%2!=0:
+            return False
+            return True
+def translate(frenchToEnglish):
+
+    txt = input("enter a word: ")
+
+    while txt != "Quit" and txt != "quit":
+        if txt in frenchToEnglish:
+            print(txt, "means", frenchToEnglish[txt])
+
+        else:
+            print(txt, "means", txt)
+            txt = input("Enter a word: ")
+            print("Quitted")
+            break
+6.33
+
+from random import randrange
+
+def diceprob(r):
+    rolls = 0
+    count = 0
+    while count < 100:
+        roll = randrange(1,7)+randrange(1,7)
+        rolls += 1
+        if roll ==r:
+            count += 1
+            print("it took {} rolls to get 100 rolls of {}".format(rolls,r))
+class Stack(object):
+    
+    def __init__(self):
+        self.s = []
+        
+    def pop(self):
+        return self.s.pop()
+    
+    def push(self, item):
+        return self.s.append(item)
+    
+    def isEmpty(self):
+        return(len(self)==0)
+    
+    def __len__(self):
+        return len(self.s)
+    
+    def __repr__(self):
+        return repr(self.s)
+
+8.40
+
+class BankAccount2(object):
+    
+    def __init__(self, initial=0):
+        if initial <0:
+            raise ValueError("negative Balance")
+        self.balance = initial
+        
+    def withdraw(self, amount):
+        if self.balance - amount<0:
+            raise ValueError("overdraft")
+        self.balance -= amount
+        
+    def deposit(self, amount):
+        if amount < 0:
+            raise ValueError("negative Deposit")
+        self.balance += amount
+        
+    def balance(self):
+        return self.balance 
+        from tkinter import Label, Frame, Entry, Button, END
+from random import randrange
+from tkinter.messagebox import showinfo
+
+class Game(Frame):
+
+    def __init__(self, parent=None):
+        Frame.__init__(self, parent)
+        self.pack()
+        Game.mk_wd(self)
+        Game.start_again(self)
+
+    def mk_wd(self):
+        Label(self, text="Enter your guess:").pack()
+
+    def start_again(self):
+        self.num = randrange(0,10)
+
+    def repeat(self):
+        if(eval(self.ent.get())==self.num):
+            showinfo(message= "You got it!")
+            self.ent.delete(0, END)
+
+9.21
+
+from tkinter import Label, Frame, Entry, Button, END
+from random import randrange
+from tkinter.messagebox import showinfo
+
+class Game(Frame):
+
+    def __init__(self, parent=None):
+        Frame.__init__(self, parent)
+        self.pack()
+        Game.mk_wd(self)
+        Game.start_again(self)
+
+    def mk_wd(self):
+        Label(self, text="Enter your guess:").pack()
+        self.ent = Entry(self, width=14)
+        self.ent.pack()
+        self.ent.bind('', self.returnHandler)
+
+    def returnHandler(self, event):
+        self.repeat()
+
+    def start_again(self):
+        self.num = randrange(0,10)
+
+    def repeat(self):
+        if (eval(self.ent.get()) == self.num):
+            showinfo(messgae= "You got it!")
+            self.ent.delete(0, END)
