@@ -1,0 +1,282 @@
+2. Pokemon Algorithm
+
+import random
+
+print("This is a pokemon battle")
+
+Choose from either the fire, water, or grass pokemon.
+
+Use a random program to select the computers pokemon
+
+Write a boolean condition that allows the users selection and computers decision to attack
+    Take the user's input and compare t against the comuters
+        if Fire fights water:
+            Water wins
+        if Fire fights grass:
+            Fire Wins
+        if Water fights grass:
+            Grass wins
+        elif:
+            if fighters are the same, it is a draw
+
+Write a print statement that announces who wins. 
+        
+
+3.
+
+get_s= input("Enter a string: ")
+result = ''
+for ch in get_s:
+    result += ch+ch
+print(result)
+
+
+
+4.
+
+list1= eval(input("Enter a list: "))
+list2= eval(input("Enter a list: "))
+
+result = []
+for item in list1:
+    if item in list2:
+        result.append(item)
+
+print("Items in both lists are" + str(result))
+##Import random so that the player can guess any word they choose
+import random
+def guessGame ():
+    
+    
+    right_guess= input("Enter the correct word: ")
+    dash_word = "-"*len(right_guess)
+##These are dashes that represent the length of the word in dashes
+    guesses_left = 6
+##Counts how may guesses the other player has left    
+    while guesses_left > -1 and not dash_word == right_guess:
+
+        print(dash_word)
+        print(str(guesses_left))
+        guess = input("Guess: ")
+##Taks a letter guessed ftom the player        
+        if len(guess)!= 1:
+            print("You must guess one letter. ")
+        elif guess in right_guess:
+            print("That letter is correct. ")
+            dash_word = update_dash_word(right_guess, dash_word, guess)
+## SUpposed to take the right guessed letter and prints it
+        else:
+            print("That letter is in the word/")
+            guesses_left -= 1
+
+
+        if guesses_left < 0:
+            print("You lose. the right word was:" + str(right_guess))
+
+##takes the guesses and lists hoe many are left
+        else:
+            print("Congrats! The word was:" +str(right_guess))
+## Print statement if the word was correct
+def update_dash_word(right_guess,cur_dash_word, rec_guess):
+    result = " "
+
+    for i in range(len(right_guess)):
+        if right_guess[i] == rec_guess:
+            result = result+rec_guess
+## Takes rhe guessed letter and puts it on the dash
+        else:
+            result = result + cur_dash_word[i]
+## takes the new word including the right guessed letter
+    return result
+
+
+##Main
+
+words =["ryan","play","run"]
+## makes a list so that the game could be played.
+
+right_guess = random.choice(words)
+guessGame()
+
+
+2.
+##Imports randint so the computer could choose
+from random import randint
+
+def pokemon():
+    computer = randint(1, 3)
+    play = int(input("1. Charzard, 2. Squirtle, 3. Bulbassaur: "))
+## Computers choice is selected and the user gets to choose input
+    if player == computer:
+        print("tie!")
+    elif player == 1:
+        if computer == 2:
+            print("You lose")
+        else:
+            print("you win ")
+    elif player ==2:
+        if computer ==3:
+            print("you lose!")
+        else:
+            print("You Win")
+
+    elif player == 3:
+        if computer == 1:
+            print("you lose")
+        else:
+            print("you win")
+    else:
+        print("That was not a valid guess")
+## Conditions of the different scenarios and the result
+    
+def main():
+    
+    print("Pokemon ")
+    print()
+    print("Rules. 1. charzard beats bulbassaur ")
+    print("\n Squirtle beats charzard")
+    print("\n bulbassaur beats squirtle")
+#This is for print statements and making the game look better aesthetically
+
+    pokemon()
+    
+main()
+## 2.
+## import os and datetime
+## get an input from the user in directory
+## In directory:
+## find what the user input in directory
+## When the file is found:
+## rename it from draft to final
+
+## 3.
+
+import os, datetime
+date = datetime.date.today()
+get_word= input("Enter a directory: ")
+first_list = os.getcwd()
+new_list= os.path.join(first_list, get_word)
+os.chdir(new_list)
+dir_contents= os.listdir(new_list)
+
+for file in dir_contents:
+
+    if "draft" in file:
+        new_dir_contents= os.rename(file, file.replace("draft", "final"))
+        print(file.replace("draft", "final"))
+        print("Edited on: ", date)
+
+    else:
+        print("Incorrect file.")
+## Import datetime,
+## make today the date indicator
+## Make date displayed by year, month, date( Split the date by "/")
+## Make day be channged to euther
+## Find the items that were sold over Saturday and sunday only.
+## Print the items in the for loop above.
+
+## 3.
+
+import csv, datetime
+
+data = csv.DictReader(open("ShopRecords.csv", "r"))
+## This is the data the for loop will loop through
+for entry in data:
+    
+    date_today = datetime.date.today()
+    
+    date_entry = entry["Date"].split("/")
+ ## This is to make sure that the date is seperated   
+    day = datetime.date(int(date_entry[2]), int(date_entry[0]), int(date_entry[1]))
+
+    if day.strftime("%A") == "Saturday" or day.strftime("%A") == "Sunday":
+## Loops to see if it was sold on a saturday 
+        print(entry["Item"])
+
+
+
+## import re, urllib.request
+## open page
+## read through page, 
+##  set the contents to a specific variable for future use
+## create an empty list
+## set counter to 0
+## close the original page
+## regular expressiona, re.findall, these find number of games played and scores
+## for every win, add 1... likewise for every loss
+## Enter the content in a list and print
+
+## 3.
+
+import re, urllib.request
+
+
+web_open = urllib.request.urlopen('http://cgi.soic.indiana.edu/~dpierz/mbball.html')
+
+lines = web_open.read().decode(errors= "replace")
+
+web_open.close()
+
+##Open the page and seperate the words
+
+wins = re.findall("(?<=<div>W).+?(?=</div>)", lines, re.DOTALL)
+losses = re.findall("(?<=<div>L).+?(?=</div>)", lines, re.DOTALL)
+
+print("Wins: ", len(wins))
+print("Loses: ", len(losses))
+
+## BONUS
+##points = 0
+##
+##for game in games:
+##    if game:
+##        first_score = game[0:1]
+##        second_score = game[0:1]
+##        points += abs(int(first_score) - int(second_score))
+##
+##print("Total Difference: ", points)
+
+##This takes both scores from and finds the diffrence between the two
+
+import xml.etree.ElementTree as ET
+
+def display_book(num):
+
+    root = ET.parse(source="library.xml")
+    books= root.iter("book")
+# parses the xml file
+
+    for book in books:
+        bookID= book.attrib["id"]
+
+        if bookID == num:
+            title = book.find("title").text
+            author = book.find("author").text
+            price = book.find("price").text
+            info = "Title: " + str(title) + " " + "Author: " + str(author) + " " + "Price: " + str(price)
+            return info
+# finds title, author, price, in file and prints a statement
+
+root = ET.parse(source="library.xml")
+books= root.iter("book")
+           
+
+for book in books:
+        genre= book.find("genre").text
+        title= book.find("title").text
+        author= book.find("author").text
+        price= book.find("price").text
+        publish= book.find("publish_date").text
+# This finds the genre, title, etc. in the file and is given a string 
+        if genre == "Computer" and "12" in publish:
+            info= "Title: " + str(title) + "\nAuthor: " + str(author) + "\nPrice: " + str(price) + "\nGenre: " + str(genre) + "\nDate of Publish" + str(publish)
+            print (info)
+
+root = ET.parse(source="library.xml")
+books= root.iter("book")
+
+#finds the genre for each book in the catalog
+for book in books:
+        genre= book.find("genre").text
+        print(genre)
+        
